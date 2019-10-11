@@ -1,0 +1,38 @@
+
+/*
+
+Beispielprogramm in C
+
+    Bestimmen des ggT von zwei eingegebenen Zahlen 
+    mit dem modernen euklidschen Algorithmus
+
+*/
+
+/* Importieren der stdio-Library für printf() und scanf() */
+#include <stdio.h>
+
+int main (void) {
+
+    /* Definitionen der benoetigten Variablen */    
+    int x, y, h;
+
+    /* Einlesen der 1. Zahl*/
+    printf("1. Zahl: ");
+    scanf("%d", &x);
+
+    /* Einlesen der 2. Zahl*/
+    printf("2. Zahl: ");
+    scanf("%d", &y);
+
+    /* Euklidischer Algorithmus zur Bestimmung des ggT */
+    while (y > 0) {
+        h = x % y;
+        x = y;
+        y = h;
+    }
+
+    /* Ausgeben des Ergebnisses */
+    printf(" ---> ggt = %d\n",x);
+    return(0);
+
+}
