@@ -1,0 +1,206 @@
+
+\documentclass[12pt, 
+               a4paper, 
+               openright,
+               parskip=full, 
+               chapterentrydots=true,
+               listof=entryprefix,
+               numbers=endperiod]{scrbook}
+
+% Nur bei Verwendung der Klasse scrbook notwendig
+\makeatletter
+\DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
+\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
+\DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
+\DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
+\DeclareOldFontCommand{\it}{\normalfont\itshape}{\mathit}
+\DeclareOldFontCommand{\sl}{\normalfont\slshape}{\@nomath\sl}
+\DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
+\makeatother
+
+% Einstellen der Seitenränder
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm]{geometry}
+
+% Packages für Deutsch
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[Sonny]{fncychap}
+% Options: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
+
+% zur Unterdrückung der Kapitelüberschrift im Seitenkopf
+\pagestyle{plain}
+
+% für absolut leere linke Seite zwischen den Kapiteln (sofern eine vorhanden)
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+  \clearpage
+  {\pagestyle{empty}\origdoublepage}%
+}
+\let\cleardoublepage\clearemptydoublepage
+
+% Das Inahltsverzeichnis im Inhaltsverzeichnis aufführen
+\setuptoc{toc}{totoc}
+
+% Packages für Programm-Listings:
+\usepackage{minted}
+\usepackage{scrhack}
+
+% Packages für Bilder
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+% Packages um PDF-Dateien einzubinden
+\usepackage{pdfpages}
+
+% Packages für Stichwortverzeichnis - Formatiert
+\usepackage{imakeidx}
+\usepackage[columns = 1]{idxlayout}
+\makeindex[options= -s my_index_style.ist]
+\usepackage{filecontents}
+\begin{filecontents}{my_index_style.ist}
+headings_flag  1                         % wir benutzen Überschriften
+heading_prefix "{\\bfseries "            % und setzen sie fett
+heading_suffix "\\hfil}\\nopagebreak\n"  % und links, nach innen kein Seitenumbruch
+delim_0 "\\dotfill"                      % Punkte zwischen Einträgen und Seitenzahlen (Ebene 0)
+delim_1 "\\dotfill"                      % Punkte zwischen Einträgen und Seitenzahlen (Ebene 1)
+delim_2 "\\dotfill"                      % Punkte zwischen Einträgen und Seitenzahlen (Ebene 2)
+delim_r "--"                             % Trenner zwischen Start und Ende eines Seitenbereiches
+suffix_2p "\\,f."                        % Suffix bei einem bereich aus 2 Seiten
+suffix_3p "\\,ff."                       % Suffix bei einem bereich aus 3 Seiten
+\end{filecontents}
+
+% Packages für Links
+\usepackage{url}
+
+\begin{document}
+
+%
+% Erstellen der Titelseite
+%
+\input{inhalte/titelseite} 
+\thispagestyle{empty}
+
+%
+% Erstellen Inhaltsverzeichnis
+%
+\newpage
+\tableofcontents
+
+\chapter{Euklidischer Algorithmus}
+\newpage
+\section{Der euklidische Algorithmus}
+\input{inhalte/programmBeschreibung} 
+
+\chapter{Klassischer euklidischer Algorithmus}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+\section{in Python}
+\begin{listing}[!ht]
+\begin{quote}
+\renewcommand{\theFancyVerbLine}{
+  \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
+
+\inputminted[linenos, breaklines, numbersep=5pt, tabsize=4, frame=leftline]{python}{./listings/ggT.py}
+\caption{Klassischer euklidischer Algorithmus in Python}\index{Programmiersprache!Python}\index{Euklid!klassischer Algorithmus}
+\end{quote}
+\end{listing}
+
+\newpage
+\section{in Java}
+\begin{listing}[!ht]
+\begin{quote}
+\renewcommand{\theFancyVerbLine}{
+  \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
+
+\inputminted[linenos, breaklines, numbersep=5pt, tabsize=4, frame=leftline]{java}{./listings/ggT.java}
+\caption{Klassischer euklidischer Algorithmus in Java}\index{Programmiersprache!Java}\index{Euklid!klassischer Algorithmus}
+\end{quote}
+\end{listing}
+
+\newpage
+\section{in C}
+\begin{listing}[!ht]
+\begin{quote}
+\renewcommand{\theFancyVerbLine}{
+  \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
+
+\inputminted[linenos, breaklines, numbersep=5pt, tabsize=4, frame=leftline]{C}{./listings/ggT.c}
+\caption{Klassischer euklidischer Algorithmus in C}\index{Programmiersprache!C}\index{Euklid!klassischer Algorithmus}
+\end{quote}
+\end{listing}
+
+
+\chapter{Moderner euklidischer Algorithmus}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+\section{in Python}
+\begin{listing}[!ht]
+\begin{quote}
+\renewcommand{\theFancyVerbLine}{
+  \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
+
+\inputminted[linenos, breaklines, numbersep=5pt, tabsize=4, frame=leftline]{python}{./listings/ggT_division.py}
+\caption{Moderner euklidischer Algorithmus in Python}\index{Programmiersprache!Python}\index{Euklid!moderner Algorithmus}
+\end{quote}
+\end{listing}
+
+\newpage
+\section{in Java}
+\begin{listing}[!ht]
+\begin{quote}
+\renewcommand{\theFancyVerbLine}{
+  \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
+
+\inputminted[linenos, breaklines, numbersep=5pt, tabsize=4, frame=leftline]{java}{./listings/ggT_division.java}
+\caption{Moderner euklidischer Algorithmus in Java}\index{Programmiersprache!Java}\index{Euklid!moderner Algorithmus}
+\end{quote}
+\end{listing}
+
+\newpage
+\section{in C}
+\begin{listing}[!ht]
+\begin{quote}
+\renewcommand{\theFancyVerbLine}{
+  \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
+
+\inputminted[linenos, breaklines, numbersep=5pt, tabsize=4, frame=leftline]{C}{./listings/ggT_division.c}
+\caption{Moderner euklidischer Algorithmus in C}\index{Programmiersprache!C}\index{Euklid!moderner Algorithmus}
+\end{quote}
+\end{listing}
+
+
+
+%
+% Abbildungsverzeichnis 
+%
+\listoffigures
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+
+%
+% Quellcodeverzeichnis
+%
+\renewcommand\listoflistingscaption{Quellcodeverzeichnis}
+\begingroup
+\let\oldnumberline\numberline
+\renewcommand{\numberline}[1]{Listing \oldnumberline{#1}}
+\listoflistings
+\endgroup
+\addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
+
+
+%
+% Stichwortverzeichis
+%
+\renewcommand{\indexname}{Stichwortverzeichnis} 
+   \label{index}
+\printindex
+\addcontentsline{toc}{chapter}{Stichwortverzeichnis}
+
+
+\end{document}
